@@ -1,3 +1,27 @@
 {
-  "extends": "next/core-web-vitals"
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "plugins": [
+    "@typescript-eslint"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 2020
+  },
+  "extends": [
+    "next/core-web-vitals",
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "prettier"
+  ],
+  "rules": {
+    "no-console": 1,
+    "endOfLine": 0,
+    "@typescript-eslint/no-unused-vars": 1,
+    "react/no-unescaped-entities": 0,
+    "@typescript-eslint/no-explicit-any": 1,
+    "@typescript-eslint/ban-ts-comment": 1,
+    "no-irregular-whitespace": 1,
+    "@typescript-eslint/no-var-requires": 0,
+    "no-prototype-builtins": "off"
+  }
 }
