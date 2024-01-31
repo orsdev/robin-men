@@ -13,16 +13,31 @@ type UseGetQuery = {
 
 export const useGetQuery = ({ key, url, options }: UseGetQuery) => {
   const token = '';
-  const { data, isLoading, isFetching, isRefetching, refetch, dataUpdatedAt } =
-    useReactQuery({
-      queryKey: key,
-      queryFn: () =>
-        fetcher({
-          url,
-          headers: { Authorization: `Bearer ${token}` }
-        }),
-      ...options
-    });
+  const {
+    data,
+    isLoading,
+    isFetching,
+    isRefetching,
+    refetch,
+    dataUpdatedAt,
+    isSuccess
+  } = useReactQuery({
+    queryKey: key,
+    queryFn: () =>
+      fetcher({
+        url,
+        headers: { Authorization: `Bearer ${token}` }
+      }),
+    ...options
+  });
 
-  return { data, isLoading, isFetching, isRefetching, dataUpdatedAt, refetch };
+  return {
+    data,
+    isLoading,
+    isFetching,
+    isRefetching,
+    dataUpdatedAt,
+    isSuccess,
+    refetch
+  };
 };

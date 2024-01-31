@@ -9,8 +9,8 @@ export interface Metrics {
 }
 
 export const useDashboardMetrics = () => {
-  const { data, isLoading, refetch, isRefetching, dataUpdatedAt } = useGetQuery(
-    {
+  const { data, isLoading, refetch, isSuccess, isRefetching, dataUpdatedAt } =
+    useGetQuery({
       key: ['dashboard-metrics'],
       url: `/dashboard`,
       options: {
@@ -18,14 +18,14 @@ export const useDashboardMetrics = () => {
         refetchOnMount: false,
         refetchOnWindowFocus: false
       }
-    }
-  );
+    });
 
   const metrics = (data?.data as Metrics) || {};
 
   return {
     isRefetching,
     isLoadingMetrics: isLoading,
+    isSuccess,
     refetchMetrics: refetch,
     dataUpdatedAt,
     metrics

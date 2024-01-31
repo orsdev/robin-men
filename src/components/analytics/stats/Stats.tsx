@@ -16,6 +16,7 @@ export const AnalyticsStat = () => {
     isLoadingMetrics,
     metrics,
     dataUpdatedAt,
+    isSuccess,
     refetchMetrics,
     isRefetching
   } = useDashboardMetrics();
@@ -25,6 +26,15 @@ export const AnalyticsStat = () => {
     return (
       <div className="mt-[40px] min-h-[150px] flex items-center justify-center">
         <Spinner label="Loading metrics..." />
+      </div>
+    );
+  }
+
+  // Error message
+  if (!isLoadingMetrics && !isSuccess!) {
+    return (
+      <div className="mt-[40px] min-h-[150px] flex items-center justify-center">
+        <p className="text-center text-sm">Failed to retrieve metrics...</p>
       </div>
     );
   }

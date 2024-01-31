@@ -3,7 +3,7 @@ import axios, { AxiosRequestConfig } from 'axios';
 
 export const api = axios.create({
   baseURL: UTILS.processEnv.BASE_ENDPOINT,
-  timeout: 20000 // 20 seconds
+  timeout: 40000 // 40 seconds
 });
 
 export const fetcher = (options: AxiosRequestConfig) =>
