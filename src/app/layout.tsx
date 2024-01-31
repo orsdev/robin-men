@@ -1,7 +1,14 @@
 import type { Metadata } from 'next';
 import { DefaultProviders } from '@/lib';
 import { AppContextProvider } from '@/contexts';
+import { Hanken_Grotesk } from 'next/font/google';
 import './globals.css';
+
+const hanken = Hanken_Grotesk({
+  weight: ['400', '500', '600', '700'],
+  subsets: ['latin'],
+  display: 'swap'
+});
 
 export const metadata: Metadata = {
   title: 'Robin',
@@ -14,7 +21,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={hanken.className}>
       <body>
         <DefaultProviders>
           <AppContextProvider>
