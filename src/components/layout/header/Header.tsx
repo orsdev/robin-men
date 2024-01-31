@@ -1,3 +1,5 @@
+'use client';
+
 import { Icon } from '@/components/icons';
 import { useSidebarContext } from '@/contexts/sidebar';
 import { clsx } from 'clsx';
@@ -9,6 +11,12 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger
+} from '@/components/ui/tooltip';
 
 import Style from './Header.module.scss';
 
@@ -23,7 +31,10 @@ export const LayoutHeader = () => {
         <div>
           <div className={Style.layout__header__left}>
             {/* Menu button */}
-            <button onClick={handleToggleSidebar}>
+            <button
+              onClick={handleToggleSidebar}
+              className="transition duration-300  transform active:scale-[.8]"
+            >
               <Icon.HamburgerMenu />
             </button>
 
@@ -34,10 +45,24 @@ export const LayoutHeader = () => {
           </div>
         </div>
         <div className="flex gap-[12px]">
-          {/* Download button */}
-          <button className="hidden sm:flex items-center justify-center text-md font-medium bg-others-400 text-white rounded-[30px] py-[4px] px-[35px]">
+          {/* Download button(Desktop) */}
+          <button className="hidden sm:flex w-[40px] h-[40px] sm:h-auto sm:w-auto  items-center justify-center text-md font-medium bg-others-400 transition duration-300 hover:bg-blue-500 text-white rounded-full sm:rounded-[30px] py-[4px] sm:px-[35px] transform active:scale-[.95]">
             Download Report
           </button>
+
+          {/* Download button(Mobile) */}
+          <div className="flex sm:hidden w-[40px] h-[40px] sm:h-auto sm:w-auto  items-center justify-center text-md font-medium bg-others-400 transition duration-300 hover:bg-blue-500 text-white rounded-full sm:rounded-[30px] py-[4px] sm:px-[35px] transform active:scale-[.95]">
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger>
+                  <Icon.Download />
+                </TooltipTrigger>
+                <TooltipContent>
+                  <span>Download Report</span>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+          </div>
 
           {/* Dropdown */}
           <DropdownMenu>

@@ -1,3 +1,5 @@
+import dayjs from 'dayjs';
+
 function convertCamelCaseToWords(camelCaseString: string) {
   const words = camelCaseString
     .replace(/([a-z])([A-Z])/g, '$1 $2')
@@ -10,6 +12,10 @@ function bytesToGigabytes(bytes: number) {
   return gigabytes;
 }
 
+const dateFormatter = (duration: number) => {
+  return dayjs(new Date()).add(duration, 'd').format();
+};
+
 const processEnv = {
   BASE_ENDPOINT:
     process.env.BASE_ENDPOINT || 'https://sfe-m3if.onrender.com/api/v1',
@@ -18,6 +24,7 @@ const processEnv = {
 
 export const UTILS = {
   bytesToGigabytes,
+  dateFormatter,
   convertCamelCaseToWords,
   processEnv
 };

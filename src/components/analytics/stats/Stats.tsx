@@ -23,15 +23,15 @@ export const AnalyticsStat = () => {
   // Spinner
   if (isLoadingMetrics) {
     return (
-      <div className="mt-[40px]">
-        <Spinner label="Loading metrics..." />;
+      <div className="mt-[40px] min-h-[150px] flex items-center justify-center">
+        <Spinner label="Loading metrics..." />
       </div>
     );
   }
 
   return (
     <div>
-      <header className="flex items-center gap-3">
+      <header className="flex flex-col sm:flex-row items-center gap-3">
         {/* Last updated */}
         <p className="text-text text-md">
           Last updated {dayjs(dataUpdatedAt).fromNow()}

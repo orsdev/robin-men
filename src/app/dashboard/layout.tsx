@@ -15,10 +15,10 @@ export default function DashboardLayout({
   return (
     <>
       <Sidebar />
-      <main className="py-[20px] before:bg-others-700 before:absolute before:w-full before:h-full before:z-[-1] before:content-[''] before:left-0 before:top-0">
+      <main className="py-[20px] before:bg-others-700 before:fixed before:w-full before:h-full before:z-[-1] before:content-[''] before:left-0 before:top-0">
         <div
           className={clsx(
-            'transition duration-1000 px-[50px]',
+            'transition duration-1000 px-[20px] sm:px-[50px]',
             Style.dashboard__layout
           )}
           style={{
@@ -34,7 +34,7 @@ export default function DashboardLayout({
         <hr className="flex w-full my-[25px] border-others-300" />
         <div
           className={clsx(
-            'transition duration-1000 px-[50px]',
+            'transition duration-1000 px-[20px] sm:px-[50px]',
             Style.dashboard__layout
           )}
           style={{
@@ -42,7 +42,7 @@ export default function DashboardLayout({
           }}
           data-show={showSidebar}
         >
-          <div className="px-[4vw] mx-auto">{children}</div>
+          <div className=" sm:px-[4vw] mx-auto">{children}</div>
         </div>
       </main>
     </>
