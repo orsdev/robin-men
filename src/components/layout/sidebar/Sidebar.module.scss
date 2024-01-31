@@ -1,0 +1,19 @@
+.sidebar {
+  transform: translateX(-100%);
+  transition: transform 450ms ease;
+  width: 270px;
+
+  @media (min-width: 1024px) {
+    &[data-show='true'] {
+      overflow: hidden;
+      transform: translateX(0);
+    }
+  }
+
+  @media (max-width: 1023px) {
+    &[data-show='false'] {
+      overflow: hidden;
+      transform: translateX(0);
+    }
+  }
+}

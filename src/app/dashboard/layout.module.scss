@@ -1,0 +1,9 @@
+.dashboard__layout {
+  transition: margin 0.4s ease;
+
+  @media (min-width: 1024px) {
+    &[data-show='true'] {
+      margin-left: 270px;
+    }
+  }
+}

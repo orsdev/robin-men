@@ -25,21 +25,27 @@ const config = {
         muted: '#9999BC',
         text: '#51545C',
         others: {
-          100: 'Deep Black'
+          100: '#F5F7FC',
+          200: '#8D9091',
+          300: '#D3D7EA',
+          400: '#4568D1'
         }
+      },
+      spacing: {
+        '270': '270px'
       },
       fontSize: {
         sm: [
-          '1.4px',
+          '14px',
           {
-            lineHeight: '2.4rem',
+            lineHeight: '24px',
             fontWeight: '400'
           }
         ],
         md: [
-          '1.6px',
+          '16px',
           {
-            lineHeight: '2.4rem',
+            lineHeight: '24px',
             fontWeight: '400'
           }
         ]

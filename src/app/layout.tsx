@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { DefaultProviders } from '@/lib';
-
+import { AppContextProvider } from '@/contexts';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -17,7 +17,9 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <DefaultProviders>
-          <main>{children}</main>
+          <AppContextProvider>
+            <div>{children}</div>
+          </AppContextProvider>
         </DefaultProviders>
       </body>
     </html>
