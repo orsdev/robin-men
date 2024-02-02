@@ -1,5 +1,11 @@
 import dayjs from 'dayjs';
 
+/**
+ * Converts a camelCase string to words with spaces.
+ *
+ * @param {string} camelCaseString - The camelCase string to convert.
+ * @returns {string} - The converted string with spaces between words.
+ */
 function convertCamelCaseToWords(camelCaseString: string) {
   const words = camelCaseString
     .replace(/([a-z])([A-Z])/g, '$1 $2')
@@ -7,11 +13,39 @@ function convertCamelCaseToWords(camelCaseString: string) {
   return words.charAt(0).toUpperCase() + words.slice(1);
 }
 
-function bytesToGigabytes(bytes: number) {
-  const gigabytes = Math.round(bytes / (1024 * 1024 * 1024));
-  return gigabytes;
+/**
+ * Formats the given number of bytes into a human-readable storage size.
+ *
+ * @param {number} bytes - The number of bytes to format.
+ * @returns {string} - The formatted storage size with appropriate units.
+ */
+function formatStorageSize(bytes: number) {
+  const kilobyte = 1024;
+  const megabyte = kilobyte * 1024;
+  const gigabyte = megabyte * 1024;
+  const terabyte = gigabyte * 1024;
+
+  const options = { maximumFractionDigits: 2, minimumFractionDigits: 0 };
+
+  if (bytes < kilobyte) {
+    return bytes + ' Bytes';
+  } else if (bytes < megabyte) {
+    return (bytes / kilobyte).toLocaleString(undefined, options) + ' KB';
+  } else if (bytes < gigabyte) {
+    return (bytes / megabyte).toLocaleString(undefined, options) + ' MB';
+  } else if (bytes < terabyte) {
+    return (bytes / gigabyte).toLocaleString(undefined, options) + ' GB';
+  } else {
+    return (bytes / terabyte).toLocaleString(undefined, options) + ' TB';
+  }
 }
 
+/**
+ * Formats a date by adding the specified duration in days to the current date.
+ *
+ * @param {number} duration - The duration in days to add to the current date.
+ * @returns {string} - The formatted date string.
+ */
 const dateFormatter = (duration: number) => {
   return dayjs(new Date()).add(duration, 'd').format();
 };
@@ -23,7 +57,7 @@ const processEnv = {
 };
 
 export const UTILS = {
-  bytesToGigabytes,
+  formatStorageSize,
   dateFormatter,
   convertCamelCaseToWords,
   processEnv

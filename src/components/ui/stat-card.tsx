@@ -20,7 +20,7 @@ export const StatCard: FC<StatCard> = ({
         {UTILS.convertCamelCaseToWords(label)}
       </p>
       <h3 className="mt-[12px] text-[28px] text-accent font-semibold">
-        {is_bytes && `${UTILS.bytesToGigabytes(value)} GB `}
+        {is_bytes && `${UTILS.formatStorageSize(value)} `}
         {is_bytes && remaining_bytes && (
           <span className="text-[15px]">
             <span>of</span> {remaining_bytes} GB
