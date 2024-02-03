@@ -19,7 +19,7 @@ function convertCamelCaseToWords(camelCaseString: string) {
  * @param {number} bytes - The number of bytes to format.
  * @returns {string} - The formatted storage size with appropriate units.
  */
-function formatStorageSize(bytes: number) {
+function formatStorageSize(byte: number) {
   const kilobyte = 1024;
   const megabyte = kilobyte * 1024;
   const gigabyte = megabyte * 1024;
@@ -27,16 +27,16 @@ function formatStorageSize(bytes: number) {
 
   const options = { maximumFractionDigits: 2, minimumFractionDigits: 0 };
 
-  if (bytes < kilobyte) {
-    return bytes + ' Bytes';
-  } else if (bytes < megabyte) {
-    return (bytes / kilobyte).toLocaleString(undefined, options) + ' KB';
-  } else if (bytes < gigabyte) {
-    return (bytes / megabyte).toLocaleString(undefined, options) + ' MB';
-  } else if (bytes < terabyte) {
-    return (bytes / gigabyte).toLocaleString(undefined, options) + ' GB';
+  if (byte < kilobyte) {
+    return byte + ' Bytes';
+  } else if (byte < megabyte) {
+    return (byte / kilobyte).toLocaleString(undefined, options) + ' KB';
+  } else if (byte < gigabyte) {
+    return (byte / megabyte).toLocaleString(undefined, options) + ' MB';
+  } else if (byte < terabyte) {
+    return (byte / gigabyte).toLocaleString(undefined, options) + ' GB';
   } else {
-    return (bytes / terabyte).toLocaleString(undefined, options) + ' TB';
+    return (byte / terabyte).toLocaleString(undefined, options) + ' TB';
   }
 }
 
@@ -66,6 +66,23 @@ const dateFormatter = (duration: number) => {
   return dayjs(new Date()).add(duration, 'd').format();
 };
 
+/**
+ * Converts a string representing a range to an array of numbers.
+ * If the string contains '+', returns an array with just the number.
+ * If the string contains '-', splits the string at '-' and converts each part to a number.
+ *
+ * @param {string} inputString - The input string representing a range.
+ * @returns {number[]} An array of numbers representing the range.
+ */
+function convertStringToRangeArray(inputString: string) {
+  if (inputString.includes('+')) {
+    // If the string contains '+', return an array with just the number
+    return [parseInt(inputString, 10)];
+  } else {
+    // Otherwise, split the string at '-' and convert each part to a number
+    return inputString.split('-').map(Number);
+  }
+}
 const processEnv = {
   BASE_ENDPOINT:
     process.env.BASE_ENDPOINT || 'https://sfe-m3if.onrender.com/api/v1',
@@ -77,5 +94,6 @@ export const UTILS = {
   dateFormatter,
   arrowSortingClassOpacity,
   convertCamelCaseToWords,
+  convertStringToRangeArray,
   processEnv
 };

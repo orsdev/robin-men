@@ -8,19 +8,24 @@ import {
   SelectTrigger,
   SelectValue
 } from '@/components/ui/select';
+import { cn } from '@/lib';
 import { FC } from 'react';
 
 interface SelectDropdown {
   placeholder?: string;
   defaultValue?: string;
   onChange(value: string): void;
-  options: Array<{ label: string; value: string }>;
+  classes?: string;
+  value?: string;
+  options: Array<{ label: string; value: string | number }>;
 }
 
 export const SelectDropdown: FC<SelectDropdown> = ({
   placeholder,
   onChange,
+  classes = '',
   defaultValue = '',
+  value = '',
   options = []
 }) => {
   return (
@@ -29,14 +34,20 @@ export const SelectDropdown: FC<SelectDropdown> = ({
         onChange(value);
       }}
       defaultValue={defaultValue}
+      value={value || defaultValue}
     >
-      <SelectTrigger className="min-w-[100px] w-full bg-others-50 rounded-[4px] border-none px-[10px]">
+      <SelectTrigger
+        className={cn(
+          'min-w-[100px] w-full bg-others-50 rounded-[4px] border-none px-[10px]',
+          classes
+        )}
+      >
         <SelectValue placeholder={placeholder} />
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
           {options?.map((opt) => (
-            <SelectItem value={opt.value} key={opt.value}>
+            <SelectItem value={opt.value.toString()} key={opt.value}>
               {opt.label}
             </SelectItem>
           ))}

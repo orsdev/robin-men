@@ -66,8 +66,7 @@ export function CustomTable<Data, Column>({
                 </TableCell>
               </TableRow>
             )}
-            {hasData &&
-              table.getRowModel().rows?.length &&
+            {hasData && table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
                 <TableRow
                   key={row.id}
@@ -83,7 +82,10 @@ export function CustomTable<Data, Column>({
                     </TableCell>
                   ))}
                 </TableRow>
-              ))}
+              ))
+            ) : (
+              <></>
+            )}
 
             {/* Loading state */}
             {isLoadingData && <TableLoader colSpan={columns?.length} />}

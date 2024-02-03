@@ -2,6 +2,7 @@
 
 import {
   ColumnDef,
+  ColumnFiltersState,
   SortingState,
   getCoreRowModel,
   getFacetedMinMaxValues,
@@ -12,7 +13,7 @@ import {
   getSortedRowModel,
   useReactTable
 } from '@tanstack/react-table';
-import { useMemo, useState } from 'react';
+import { Dispatch, SetStateAction, useMemo, useState } from 'react';
 
 interface CustomTableProps<Data> {
   data: Array<Data>;
@@ -20,7 +21,9 @@ interface CustomTableProps<Data> {
   columns: Array<ColumnDef<Data, any>>;
   pageSize?: number;
   totalItems?: number;
+  columnFilters?: ColumnFiltersState;
   globalFilter?: string;
+  onFilterChange?: Dispatch<SetStateAction<ColumnFiltersState>>;
   onGlobalFilterChange?(val: string): void;
 }
 
@@ -31,7 +34,9 @@ export const useCustomTable = <Data>({
   columns,
   globalFilter,
   onGlobalFilterChange,
+  onFilterChange,
   totalItems,
+  columnFilters = [],
   currentPage = 1,
   pageSize = 10
 }: CustomTableProps<Data>) => {
@@ -50,6 +55,7 @@ export const useCustomTable = <Data>({
   const table = useReactTable({
     columns,
     data: data ?? emptyArray,
+    onColumnFiltersChange: onFilterChange,
     onGlobalFilterChange: onGlobalFilterChange,
     onSortingChange: setSorting,
     getSortedRowModel: getSortedRowModel(),
@@ -62,6 +68,7 @@ export const useCustomTable = <Data>({
     pageCount: totalItems || 0,
     manualPagination: true,
     state: {
+      columnFilters,
       pagination,
       sorting,
       globalFilter
@@ -71,6 +78,8 @@ export const useCustomTable = <Data>({
 
   return {
     hasData,
+    filterColumns: columnFilters,
+    onFilterChange,
     total: totalItems || 0,
     table
   };

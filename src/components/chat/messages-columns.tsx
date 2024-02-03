@@ -22,53 +22,16 @@ export type ChatMessages = {
   media_sent: number;
 };
 
-export const ChatMessagesData: ChatMessages[] = [
-  {
-    id: 1,
-    full_name: 'devon lane',
-    message_sent: 100,
-    media_storage_used: 1153433.6,
-    date_created: '2023-01-18T16:05:09.838Z',
-    media_sent: 21
-  },
-  {
-    id: 2,
-    full_name: 'darrel steward',
-    message_sent: 200,
-    media_storage_used: 1258291.2,
-    date_created: '2023-02-18T16:05:09.838Z',
-    media_sent: 4
-  },
-  {
-    id: 3,
-    full_name: 'leslie alexandra',
-    message_sent: 300,
-    media_storage_used: 1363148.8,
-    date_created: '2023-03-18T16:05:09.838Z',
-    media_sent: 82
-  },
-  {
-    id: 4,
-    full_name: 'john smith',
-    message_sent: 100,
-    media_storage_used: 1468006.4,
-    date_created: '2023-04-18T16:05:09.838Z',
-    media_sent: 6
-  },
-  {
-    id: 5,
-    full_name: 'james martin',
-    message_sent: 100,
-    media_storage_used: 1153433.6,
-    date_created: '2023-05-18T16:05:09.838Z',
-    media_sent: 10
-  }
-];
-
 type ChatMessagesColumns = {
   handleView(value: ChatMessages): void;
   handleDisable(value: ChatMessages): void;
 };
+
+export enum DirectMessagesFilterColumnsEnum {
+  STORAGE = 'media_storage_used',
+  DATE_CREATED = 'date_created',
+  MESSAGES_SENT = 'message_sent'
+}
 
 export const ChatMessagesColumns = ({
   handleView,
@@ -83,6 +46,32 @@ export const ChatMessagesColumns = ({
   },
   {
     accessorKey: 'message_sent',
+    id: DirectMessagesFilterColumnsEnum.MESSAGES_SENT,
+    filterFn: (rows: any, columnIds, filterValues: string) => {
+      // If filter values are not provided or empty, return all rows
+      if (!filterValues || filterValues.length === 0) {
+        return rows;
+      }
+
+      // If the specified column values are not available, return all rows
+      if (!rows.getValue(columnIds)) return rows;
+
+      const filterRange = UTILS.convertStringToRangeArray(filterValues);
+
+      const [min, max] = filterRange;
+      const rowsValue = rows.getValue(columnIds);
+
+      // Check if min and max are numbers, then filter rows within the specified range.
+      if (typeof min === 'number' && typeof max === 'number') {
+        return rowsValue >= min && rowsValue <= max;
+      } else if (!max) {
+        // If only a minimum value is provided, filter rows with values greater than or equal to the minimum.
+        return rowsValue >= min;
+      } else {
+        // If no valid conditions are met, return the original rows.
+        return rows;
+      }
+    },
     header: ({ column }) => {
       const sortingDirection = column.getIsSorted();
       return (
@@ -102,6 +91,32 @@ export const ChatMessagesColumns = ({
   },
   {
     accessorKey: 'media_storage_used',
+    id: DirectMessagesFilterColumnsEnum.STORAGE,
+    filterFn: (rows: any, columnIds, filterValues: string) => {
+      // If filter values are not provided or empty, return all rows
+      if (!filterValues || filterValues.length === 0) {
+        return rows;
+      }
+
+      // If the specified column values are not available, return all rows
+      if (!rows.getValue(columnIds)) return rows;
+
+      const filterRange = UTILS.convertStringToRangeArray(filterValues);
+
+      const [min, max] = filterRange;
+      const rowsValue = rows.getValue(columnIds);
+
+      // Check if min and max are numbers, then filter rows within the specified range.
+      if (typeof min === 'number' && typeof max === 'number') {
+        return rowsValue >= min && rowsValue <= max;
+      } else if (!max) {
+        // If only a minimum value is provided, filter rows with values greater than or equal to the minimum.
+        return rowsValue >= min;
+      } else {
+        // If no valid conditions are met, return the original rows.
+        return rows;
+      }
+    },
     header: ({ column }) => {
       const sortingDirection = column.getIsSorted();
 
@@ -124,6 +139,37 @@ export const ChatMessagesColumns = ({
   },
   {
     accessorKey: 'date_created',
+    id: DirectMessagesFilterColumnsEnum.DATE_CREATED,
+    filterFn: (rows: any, columnIds, filterValues: string) => {
+      // If filter values are not provided or empty, return all rows
+      if (!filterValues || filterValues.length === 0) {
+        return rows;
+      }
+
+      // If the specified column values are not available, return all rows
+      if (!rows.getValue(columnIds)) return rows;
+
+      // Split the filter range into 'from' and 'to' dates
+      const filterRange = filterValues.split('-');
+      const [from, to] = filterRange;
+
+      // Get the value of the specified column in the current row
+      const rowsValue = rows.getValue(columnIds);
+
+      // Convert filter 'from' and 'to' dates to Unix timestamps using dayjs
+      const dateFrom = dayjs(from).unix();
+      const dateTo = dayjs(to).unix();
+
+      // Convert the column value to a Unix timestamp
+      const rowsValueToUnix = dayjs(rowsValue).unix();
+
+      // Check if the column value is within the specified date range
+      const isWithinRange =
+        rowsValueToUnix >= dateFrom && rowsValueToUnix <= dateTo;
+
+      // Return the result of the filter
+      return isWithinRange;
+    },
     header: ({ column }) => {
       const sortingDirection = column.getIsSorted();
       return (
