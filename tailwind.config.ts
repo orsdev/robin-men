@@ -24,6 +24,10 @@ const config = {
         highlight: '#EA8D51',
         muted: '#9999BC',
         text: '#51545C',
+        neutral: {
+          50: '#5A483C',
+          100: '#535f891a'
+        },
         others: {
           50: '#ededed66',
           100: '#F5F7FC',

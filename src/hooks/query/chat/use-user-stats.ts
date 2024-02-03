@@ -10,12 +10,7 @@ export interface UserStats {
 export const useUserStats = () => {
   const { data, isLoading, isSuccess } = useGetQuery({
     key: ['user_stats'],
-    url: `/chat_dashboard`,
-    options: {
-      staleTime: Infinity,
-      refetchOnMount: false,
-      refetchOnWindowFocus: false
-    }
+    url: `/chat_dashboard`
   });
 
   const user_stats = (data?.data as UserStats) || {};

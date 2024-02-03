@@ -11,6 +11,8 @@ export default function AnalyticsPage() {
       <AnalyticsStat />
       {/* Divider */}
       <hr className="flex w-full my-[25px] border-others-800 opacity-[0.1]" />
+
+      {/* Charts */}
       <div className="flex flex-col xl:flex-row gap-[23px] w-full">
         <div className="flex-1">
           <ActiveDailyUsers />

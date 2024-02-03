@@ -41,6 +41,22 @@ function formatStorageSize(bytes: number) {
 }
 
 /**
+ * Determines the CSS opacity class based on sorting direction and type.
+ *
+ * @param {string | boolean} direction - Sorting direction ('asc', 'desc', or false if not sorted).
+ * @param {'up' | 'down'} type - Sorting arrow type ('up' or 'down').
+ * @returns {string} - CSS opacity class.
+ */
+const arrowSortingClassOpacity = (
+  direction: string | boolean,
+  type: 'up' | 'down'
+) => {
+  if (direction === 'desc' && type === 'down') return 'opacity-[.3]';
+  else if (direction === 'asc' && type === 'up') return 'opacity-[.3]';
+  else return 'opacity-[1]';
+};
+
+/**
  * Formats a date by adding the specified duration in days to the current date.
  *
  * @param {number} duration - The duration in days to add to the current date.
@@ -59,6 +75,7 @@ const processEnv = {
 export const UTILS = {
   formatStorageSize,
   dateFormatter,
+  arrowSortingClassOpacity,
   convertCamelCaseToWords,
   processEnv
 };

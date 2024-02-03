@@ -1,0 +1,111 @@
+.paginationContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  list-style: none;
+  user-select: none;
+
+  [class~='page-item'] {
+    position: relative;
+
+    color: #212b36;
+    border: 1px solid #dfe3e8;
+    display: none;
+    font-size: 14px;
+    border-radius: 4px;
+
+    &[class~='disabled'] {
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+
+    &[class~='selected'] {
+      color: #0546e0;
+
+      background: #fff;
+      border: 1px solid #0546e0;
+
+      visibility: hidden;
+      opacity: 0;
+
+      @media (min-width: 650px) {
+        visibility: visible;
+        opacity: 1;
+      }
+    }
+
+    &:not(:last-child) {
+      margin-right: 8px;
+    }
+
+    @media (min-width: 650px) {
+      display: flex;
+    }
+  }
+
+  [class~='page-link'] {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 32px;
+    height: 32px;
+    &[class~='disabled'] {
+      color: #d0d5dd;
+    }
+  }
+
+  [class~='page-prev'] {
+    width: 32px;
+    height: 32px;
+
+    margin-right: 8px;
+    &[class~='disabled'] {
+      cursor: not-allowed;
+      &[class~='page-link'] {
+        cursor: not-allowed;
+      }
+    }
+
+    button {
+      width: 32px;
+      height: 32px;
+      color: #c4cdd5;
+    }
+
+    &[class~='disabled'] {
+      button {
+        background-color: #919eab;
+        color: #fff;
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+    }
+  }
+
+  [class~='page-next'] {
+    width: 32px;
+    height: 32px;
+    &[class~='disabled'] {
+      cursor: not-allowed;
+      &[class~='page-link'] {
+        cursor: not-allowed;
+      }
+    }
+
+    button {
+      width: 32px;
+      height: 32px;
+      color: #c4cdd5;
+    }
+
+    &[class~='disabled'] {
+      button {
+        background-color: #919eab;
+        color: #fff;
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+    }
+  }
+}

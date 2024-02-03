@@ -1,4 +1,4 @@
-export const Spinner = ({ label = 'Loading...' }: { label: string }) => {
+export const Spinner = ({ label = 'Loading...' }: { label?: string }) => {
   return (
     <div className="w-full flex  flex-col items-center justify-center relative">
       <div

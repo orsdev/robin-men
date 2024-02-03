@@ -14,7 +14,10 @@ export default function DashboardLayout({
   const { showSidebar } = useSidebarContext();
   return (
     <>
+      {/* Sidebar */}
       <Sidebar />
+
+      {/* Main */}
       <main className="py-[20px] before:bg-others-700 before:fixed before:w-full before:h-full before:z-[-1] before:content-[''] before:left-0 before:top-0">
         <div
           className={clsx(
@@ -26,12 +29,15 @@ export default function DashboardLayout({
           }}
           data-show={showSidebar}
         >
+          {/* Header */}
           <LayoutHeader />
 
           <h5 className="text-muted text-md mt-4">Hello Ayomide! 👋🏼</h5>
         </div>
         {/* Divider */}
         <hr className="flex w-full my-[25px] border-others-300" />
+
+        {/* Children */}
         <div
           className={clsx(
             'transition duration-1000 px-[20px] sm:px-[50px]',
@@ -42,7 +48,7 @@ export default function DashboardLayout({
           }}
           data-show={showSidebar}
         >
-          <div className=" sm:px-[4vw] mx-auto">{children}</div>
+          <div className=" sm:px-[4vw] mx-auto pb-[40px]">{children}</div>
         </div>
       </main>
     </>
