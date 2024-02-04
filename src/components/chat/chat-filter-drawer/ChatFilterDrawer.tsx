@@ -1,7 +1,12 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-import { Drawer, DrawerClose, DrawerContent } from '@/components/ui/drawer';
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerOverlay
+} from '@/components/ui/drawer';
 import { X as XICON } from 'lucide-react';
 import { SelectDropdown } from '@/components/ui/select-dropdown';
 import { ColumnFiltersState, Table } from '@tanstack/react-table';
@@ -37,8 +42,11 @@ export function ChatFilterDrawer({
     onCloseDrawer
   });
 
+  console.log(formData);
+
   return (
     <Drawer direction="right" open={open}>
+      <DrawerOverlay onClick={onCloseDrawer} />
       <DrawerContent className="h-full">
         <div className="flex flex-col h-full gap-3">
           {/* Header */}
@@ -46,7 +54,7 @@ export function ChatFilterDrawer({
             <DrawerClose className="bg-white w-full">
               <div className="flex justify-between items-center gap-4 w-full">
                 <h3 className="text-[20px]">Filter Table</h3>
-                <XICON color="#D53120" size={20} />
+                <XICON color="#D53120" size={20} onClick={onCloseDrawer} />
               </div>
             </DrawerClose>
           </div>
@@ -60,6 +68,7 @@ export function ChatFilterDrawer({
                   onChange={(date) => {
                     handleSetFormData({ name: 'from', value: date });
                   }}
+                  maxDate={formData['to']}
                   value={formData['from']}
                 />
               </div>
@@ -70,6 +79,7 @@ export function ChatFilterDrawer({
                   onChange={(date) => {
                     handleSetFormData({ name: 'to', value: date });
                   }}
+                  minDate={formData['from']}
                   value={formData['to']}
                 />
               </div>

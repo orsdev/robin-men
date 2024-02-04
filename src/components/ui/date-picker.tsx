@@ -1,6 +1,5 @@
 'use client';
 
-import { useState } from 'react';
 import dayjs from 'dayjs';
 
 import { cn } from '@/lib/utils';
@@ -11,14 +10,16 @@ import {
   PopoverContent,
   PopoverTrigger
 } from '@/components/ui/popover';
-import { Matcher } from 'react-day-picker';
+import { UTILS } from '@/utils';
 
 interface DatePicker {
   onChange(value: Date): void;
+  minDate?: Date | undefined;
+  maxDate?: Date | undefined;
   value: Date | undefined;
 }
 
-export function DatePicker({ onChange, value }: DatePicker) {
+export function DatePicker({ onChange, value, minDate, maxDate }: DatePicker) {
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -40,9 +41,15 @@ export function DatePicker({ onChange, value }: DatePicker) {
         <Calendar
           mode="single"
           selected={value}
+          defaultMonth={value}
           onSelect={(date) => {
             onChange(date as Date);
           }}
+          fromDate={minDate ? UTILS.addDaysToDate(minDate, 1) : undefined}
+          toDate={maxDate ? UTILS.removeDaysFromDate(maxDate, 1) : undefined}
+          disabled={[
+            { from: new Date(2024, 1, 18), to: new Date(2024, 1, 29) }
+          ]}
           initialFocus
         />
       </PopoverContent>

@@ -83,6 +83,33 @@ function convertStringToRangeArray(inputString: string) {
     return inputString.split('-').map(Number);
   }
 }
+
+/**
+ * Adds a specified number of days to a given date.
+ *
+ * @param {Date} date - The initial date.
+ * @param {number} days - The number of days to add.
+ * @returns {Date} - A new Date object with the specified days added.
+ */
+function addDaysToDate(date: Date, days: number) {
+  const newDate = new Date(date);
+  newDate.setDate(newDate.getDate() + days);
+  return newDate;
+}
+
+/**
+ * Remove a specified number of days to a given date.
+ *
+ * @param {Date} date - The initial date.
+ * @param {number} days - The number of days to remove.
+ * @returns {Date} - A new Date object with the specified days added.
+ */
+function removeDaysFromDate(date: Date, days: number) {
+  const newDate = new Date(date);
+  newDate.setDate(newDate.getDate() - days);
+  return newDate;
+}
+
 const processEnv = {
   BASE_ENDPOINT:
     process.env.BASE_ENDPOINT || 'https://sfe-m3if.onrender.com/api/v1',
@@ -95,5 +122,7 @@ export const UTILS = {
   arrowSortingClassOpacity,
   convertCamelCaseToWords,
   convertStringToRangeArray,
+  addDaysToDate,
+  removeDaysFromDate,
   processEnv
 };
