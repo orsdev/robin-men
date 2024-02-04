@@ -26,7 +26,10 @@ const config = {
         text: '#51545C',
         neutral: {
           50: '#5A483C',
-          100: '#535f891a'
+          100: '#535f891a',
+          200: '#EFF1F6',
+          300: '#F05A28',
+          400: '#FFF1E9'
         },
         others: {
           50: '#ededed66',

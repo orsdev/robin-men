@@ -13,6 +13,8 @@ import { ColumnFiltersState, Table } from '@tanstack/react-table';
 import { ChatMessages, DirectMessagesFilterColumnsEnum } from '..';
 import { DatePicker } from '@/components/ui/date-picker';
 import { useChatFilter } from './use-chat-filter';
+import { TimeFrameData } from './helper-utils';
+import { TimeFrame } from './components';
 
 interface ChatFilterDrawer {
   table: Table<ChatMessages>;
@@ -30,10 +32,12 @@ export function ChatFilterDrawer({
   open = false
 }: ChatFilterDrawer) {
   const {
+    handleSetTimeFrame,
     handleAddDateRange,
     handleClearFilters,
     handleSetFormData,
     selectedFilters,
+    selectedTimeFrame,
     setSelectedFilters,
     formData
   } = useChatFilter({
@@ -41,8 +45,6 @@ export function ChatFilterDrawer({
     onClearFilter,
     onCloseDrawer
   });
-
-  console.log(formData);
 
   return (
     <Drawer direction="right" open={open}>
@@ -58,6 +60,21 @@ export function ChatFilterDrawer({
               </div>
             </DrawerClose>
           </div>
+
+          {/* Time frame */}
+          <div className="flex gap-[12px] flex-wrap items-center mt-[33px]">
+            {TimeFrameData.map(({ label, value }) => (
+              <TimeFrame
+                key={value}
+                label={label}
+                selected={selectedTimeFrame === value}
+                handleClick={() => {
+                  handleSetTimeFrame(value);
+                }}
+              />
+            ))}
+          </div>
+
           <div className="flex-1 mt-[30px] space-y-[26px] overflow-y-auto px-2 w-full">
             {/* Date Picker */}
             <div className="flex gap-4 w-full flex-col gap-y-[26px] sm:flex-row">
