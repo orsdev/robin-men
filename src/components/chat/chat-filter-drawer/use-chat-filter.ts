@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { ColumnFiltersState, Table } from '@tanstack/react-table';
 import { ChatMessages, DirectMessagesFilterColumnsEnum } from '..';
-import { TimeFrameEnum } from './helper-utils';
+import { TIME_FRAME_ENUM } from './constants';
 
 interface UseChatFilter {
   table: Table<ChatMessages>;
@@ -28,15 +28,15 @@ export const useChatFilter = ({
   onClearFilter,
   onCloseDrawer
 }: UseChatFilter) => {
-  const [selectedTimeFrame, setSelectedTimeFrame] = useState<TimeFrameEnum>(
-    TimeFrameEnum.DEFAULT
+  const [selectedTimeFrame, setSelectedTimeFrame] = useState<TIME_FRAME_ENUM>(
+    TIME_FRAME_ENUM.TODAY
   );
   const [formData, setFormData] = useState({ ...InitialFormData });
   const [selectedFilters, setSelectedFilters] = useState<ColumnFiltersState>(
     []
   );
 
-  const handleSetTimeFrame = (value: TimeFrameEnum) => {
+  const handleSetTimeFrame = (value: TIME_FRAME_ENUM) => {
     setSelectedTimeFrame(value);
   };
 
