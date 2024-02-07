@@ -55,7 +55,7 @@ export function ChatFilterDrawer({
       />
       <div
         className={cn(
-          'z-[-1] max-w-[500px] bg-white fixed top-0 h-full w-full right-0 px-[40px] py-[24px] transform translate-x-[100%] transition duration-200',
+          'z-[-1] max-w-[520px] bg-white fixed top-0 h-full w-full right-0 px-[40px] py-[24px] transform translate-x-[100%] transition duration-200',
           { 'translate-x-0  z-10': open }
         )}
       >
