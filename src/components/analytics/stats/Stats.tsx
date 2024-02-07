@@ -63,7 +63,7 @@ export const AnalyticsStat = () => {
       {/* Spinner */}
       {isRefetching && (
         <div className="mt-[40px]">
-          <Spinner label="Loading metrics..." />;
+          <Spinner label="Refetching metrics..." />
         </div>
       )}
 
